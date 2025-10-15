@@ -8,9 +8,31 @@
 </head>
 <body>
     <div class="container">
+        <button id="settingsButton" class="settings-button">⚙️</button>
+        
+        <div id="settingsModal" class="settings-modal">
+            <div class="settings-content">
+                <div class="settings-header">
+                    <h2>⚙️ Settings</h2>
+                    <button id="closeSettings" class="close-button">✕</button>
+                </div>
+                <div class="settings-body">
+                    <div class="paradigm-shift-section">
+                        <h3>🌀 Paradigm Shift</h3>
+                        <p class="paradigm-info">Reset progress for permanent bonuses!</p>
+                        <p class="paradigm-gain">Next shift: <span id="paradigmGain">0</span> shifts</p>
+                        <p class="paradigm-bonus">Current bonus: <span id="paradigmBonus">+0%</span> to all production</p>
+                        <button id="paradigmButton" class="action-button paradigm">🌀 Paradigm Shift</button>
+                    </div>
+                    <div class="settings-divider"></div>
+                    <button id="saveButton" class="action-button">💾 Save Game</button>
+                    <button id="resetButton" class="action-button reset">🔄 Reset Game</button>
+                </div>
+            </div>
+        </div>
+        
         <header>
             <h1>🫘 Bean Clicker 🫘</h1>
-            <p class="subtitle">Click the bean to harvest more beans!</p>
         </header>
 
         <main>
@@ -29,6 +51,10 @@
                             <span class="stat-label">Beans per Click:</span>
                             <span class="stat-value" id="beansPerClick">1</span>
                         </div>
+                        <div class="stat paradigm-stat" id="paradigmStat" style="display: none;">
+                            <span class="stat-label">🌀 Paradigm Shifts:</span>
+                            <span class="stat-value" id="paradigmCount">0</span>
+                        </div>
                     </div>
 
                     <div class="click-area">
@@ -37,22 +63,87 @@
                         </button>
                         <div id="clickEffect"></div>
                     </div>
+                    
+                    <!-- Combo Display -->
+                    <div id="comboDisplay" class="combo-display-sidebar" style="display: none;">
+                        🔥 1.0x COMBO!
+                    </div>
+                    
+                    <!-- Active Boosts -->
+                    <div id="activeBoosts" class="active-boosts-sidebar"></div>
+                </div>
 
-                    <div class="actions">
-                        <button id="saveButton" class="action-button">💾 Save Game</button>
-                        <button id="resetButton" class="action-button reset">🔄 Reset Game</button>
+                <!-- Mechanics Panel (Middle) -->
+                <div class="middle-panel">
+                    <div class="mechanics-section">
+                        <h2 class="panel-title">✨ Mechanics</h2>
+                        
+                        <!-- Mechanics Tabs -->
+                        <div class="mechanics-tabs">
+                            <button class="mechanics-tab-button active" data-mechanics-tab="boosts">⚡ Boosts</button>
+                            <button class="mechanics-tab-button" data-mechanics-tab="garden">🌱 Garden</button>
+                            <button class="mechanics-tab-button" data-mechanics-tab="achievements">🏆 Achievements</button>
+                        </div>
+                        
+                        <!-- Boosts Tab -->
+                        <div class="mechanics-tab-content active" id="mechanics-boosts">
+                            <h3>⚡ Power Boosts</h3>
+                            <div class="boosts-grid">
+                                <div class="boost-card">
+                                    <div class="boost-icon">⚡</div>
+                                    <h4>2x Production</h4>
+                                    <p>30s duration, 2min cooldown</p>
+                                    <button onclick="activateBoost('productionBoost')" class="boost-button">Activate</button>
+                                </div>
+                                <div class="boost-card">
+                                    <div class="boost-icon">�</div>
+                                    <h4>3x Click Power</h4>
+                                    <p>20s duration, 90s cooldown</p>
+                                    <button onclick="activateBoost('clickBoost')" class="boost-button">Activate</button>
+                                </div>
+                                <div class="boost-card">
+                                    <div class="boost-icon">🍀</div>
+                                    <h4>Lucky Boost</h4>
+                                    <p>More golden beans for 60s</p>
+                                    <button onclick="activateBoost('luckyBoost')" class="boost-button">Activate</button>
+                                </div>
+                            </div>
+                            
+                            <div class="auto-clicker-section">
+                                <h3>🤖 Automation</h3>
+                                <button id="autoClickerBtn" onclick="gameState.autoClickerUnlocked ? toggleAutoClicker() : unlockAutoClicker()" class="auto-clicker-button">
+                                    🤖 Unlock Auto-Clicker (50,000)
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Garden Tab -->
+                        <div class="mechanics-tab-content" id="mechanics-garden">
+                            <h3>🌱 Bean Garden</h3>
+                            <p class="garden-info">Plant beans and harvest them for 3x returns!</p>
+                            <div id="gardenPlots" class="garden-plots"></div>
+                        </div>
+                        
+                        <!-- Achievements Tab -->
+                        <div class="mechanics-tab-content" id="mechanics-achievements">
+                            <h3>🏆 Achievements</h3>
+                            <p class="achievement-progress">Unlocked: <span id="achievementCount">0 / 10</span></p>
+                            <div id="achievementList" class="achievements-list"></div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="right-panel">
-                    <div class="upgrades-section">
-                <h2>🛒 Upgrades</h2>
-                
-                <div class="tabs">
-                    <button class="tab-button active" data-tab="clicking">👆 Clicking</button>
-                    <button class="tab-button" data-tab="production">🏭 Production</button>
-                    <button class="tab-button" data-tab="advanced">⚡ Advanced</button>
-                </div>
+                    <h2 class="panel-title">🛒 Upgrades</h2>
+                    
+                    <!-- Upgrades Tabs -->
+                    <div class="main-tab-content active" id="main-upgrades">
+                        <div class="upgrades-section">
+                            <div class="tabs">
+                                <button class="tab-button active" data-tab="clicking">👆 Clicking</button>
+                                <button class="tab-button" data-tab="production">🏭 Production</button>
+                                <button class="tab-button" data-tab="advanced">⚡ Advanced</button>
+                            </div>
 
                 <!-- Clicking Tab -->
                 <div class="tab-content active" id="tab-clicking">
@@ -495,8 +586,11 @@
                             </div>
                             <button class="buy-button" data-upgrade="infinity">Buy</button>
                         </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                        </div>
                     </div>
                 </div>
             </div>
