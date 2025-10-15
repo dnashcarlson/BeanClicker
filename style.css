@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -10,6 +11,11 @@ body {
     min-height: 100vh;
     padding: 20px;
     color: #333;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .container {
@@ -47,12 +53,30 @@ main {
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
 }
 
+.game-container {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+.left-panel {
+    flex: 0 0 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    position: sticky;
+    top: 20px;
+}
+
+.right-panel {
+    flex: 1;
+    min-width: 0;
+}
+
 .stats-panel {
     display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    gap: 20px;
-    margin-bottom: 30px;
+    flex-direction: column;
+    gap: 15px;
     padding: 20px;
     background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
     border-radius: 15px;
@@ -80,9 +104,15 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 40px 0;
     position: relative;
     min-height: 300px;
+    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+    border-radius: 15px;
+    padding: 20px;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 .bean-button {
@@ -94,6 +124,10 @@ main {
     animation: pulse 2s ease-in-out infinite;
     position: relative;
     z-index: 10;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 .bean-button:hover {
@@ -113,6 +147,10 @@ main {
     position: absolute;
     pointer-events: none;
     z-index: 100;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 .click-text {
@@ -122,6 +160,10 @@ main {
     color: #4CAF50;
     animation: floatUp 1s ease-out forwards;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 @keyframes floatUp {
@@ -136,7 +178,7 @@ main {
 }
 
 .upgrades-section {
-    margin-top: 40px;
+    width: 100%;
 }
 
 .upgrades-section h2 {
@@ -226,6 +268,26 @@ main {
     cursor: not-allowed;
 }
 
+.upgrade-card.locked {
+    opacity: 0.3;
+    filter: grayscale(100%);
+    position: relative;
+}
+
+.upgrade-card.locked::after {
+    content: '🔒';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 2rem;
+    opacity: 0.8;
+}
+
+.upgrade-card.locked:hover {
+    transform: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
 .upgrade-icon {
     font-size: 3rem;
 }
@@ -289,8 +351,7 @@ main {
 .actions {
     display: flex;
     justify-content: center;
-    gap: 20px;
-    margin-top: 40px;
+    gap: 10px;
     flex-wrap: wrap;
 }
 
@@ -298,13 +359,14 @@ main {
     background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
     color: white;
     border: none;
-    padding: 15px 30px;
-    border-radius: 30px;
-    font-size: 1.1rem;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    flex: 1;
 }
 
 .action-button:hover {
@@ -321,6 +383,23 @@ main {
 }
 
 /* Responsive Design */
+@media (max-width: 1024px) {
+    .game-container {
+        flex-direction: column;
+    }
+
+    .left-panel {
+        flex: none;
+        width: 100%;
+        position: relative;
+        top: 0;
+    }
+
+    .right-panel {
+        width: 100%;
+    }
+}
+
 @media (max-width: 768px) {
     header h1 {
         font-size: 2rem;
@@ -340,5 +419,10 @@ main {
 
     .upgrades-grid {
         grid-template-columns: 1fr;
+    }
+
+    .left-panel {
+        flex: none;
+        width: 100%;
     }
 }

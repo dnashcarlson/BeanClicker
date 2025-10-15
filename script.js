@@ -5,47 +5,47 @@ let gameState = {
     beansPerSecond: 0,
     upgrades: {
         // Clicking upgrades
-        cursor: { count: 0, baseCost: 10, multiplier: 1.2, clickBonus: 0.05 },
-        cursor2: { count: 0, baseCost: 30, multiplier: 1.25, clickBonus: 0.1 },
-        reinforcedFinger: { count: 0, baseCost: 100, multiplier: 1.25, clickBonus: 0.3 },
-        ironFist: { count: 0, baseCost: 250, multiplier: 1.3, clickBonus: 0.7 },
-        goldenTouch: { count: 0, baseCost: 800, multiplier: 1.3, clickBonus: 1.5 },
-        diamondHand: { count: 0, baseCost: 2500, multiplier: 1.35, clickBonus: 3 },
-        titanicGrip: { count: 0, baseCost: 8000, multiplier: 1.35, clickBonus: 6 },
-        cosmicPointer: { count: 0, baseCost: 25000, multiplier: 1.35, clickBonus: 12 },
-        divineClick: { count: 0, baseCost: 80000, multiplier: 1.4, clickBonus: 25 },
-        omnipotentTouch: { count: 0, baseCost: 250000, multiplier: 1.4, clickBonus: 50 },
-        infiniteFinger: { count: 0, baseCost: 800000, multiplier: 1.4, clickBonus: 100 },
-        universalClicker: { count: 0, baseCost: 2500000, multiplier: 1.4, clickBonus: 200 },
-        quantumHand: { count: 0, baseCost: 8000000, multiplier: 1.45, clickBonus: 400 },
+        cursor: { count: 0, baseCost: 10, multiplier: 1.2, clickBonus: 0.2 },
+        cursor2: { count: 0, baseCost: 30, multiplier: 1.25, clickBonus: 0.5 },
+        reinforcedFinger: { count: 0, baseCost: 100, multiplier: 1.25, clickBonus: 1 },
+        ironFist: { count: 0, baseCost: 250, multiplier: 1.3, clickBonus: 2 },
+        goldenTouch: { count: 0, baseCost: 800, multiplier: 1.3, clickBonus: 4 },
+        diamondHand: { count: 0, baseCost: 2500, multiplier: 1.35, clickBonus: 8 },
+        titanicGrip: { count: 0, baseCost: 8000, multiplier: 1.35, clickBonus: 16 },
+        cosmicPointer: { count: 0, baseCost: 25000, multiplier: 1.35, clickBonus: 32 },
+        divineClick: { count: 0, baseCost: 80000, multiplier: 1.4, clickBonus: 64 },
+        omnipotentTouch: { count: 0, baseCost: 250000, multiplier: 1.4, clickBonus: 128 },
+        infiniteFinger: { count: 0, baseCost: 800000, multiplier: 1.4, clickBonus: 256 },
+        universalClicker: { count: 0, baseCost: 2500000, multiplier: 1.4, clickBonus: 512 },
+        quantumHand: { count: 0, baseCost: 8000000, multiplier: 1.45, clickBonus: 1024 },
         // Production upgrades
-        seedling: { count: 0, baseCost: 25, multiplier: 1.2, production: 0.05 },
-        grandma: { count: 0, baseCost: 80, multiplier: 1.25, production: 0.15 },
-        gardener: { count: 0, baseCost: 200, multiplier: 1.25, production: 0.4 },
-        farm: { count: 0, baseCost: 600, multiplier: 1.25, production: 0.8 },
-        greenhouse: { count: 0, baseCost: 1800, multiplier: 1.25, production: 2 },
-        factory: { count: 0, baseCost: 5000, multiplier: 1.25, production: 5 },
-        plantation: { count: 0, baseCost: 15000, multiplier: 1.25, production: 12 },
-        mine: { count: 0, baseCost: 45000, multiplier: 1.25, production: 28 },
-        biolab: { count: 0, baseCost: 130000, multiplier: 1.25, production: 65 },
-        megafarm: { count: 0, baseCost: 400000, multiplier: 1.25, production: 150 },
-        continent: { count: 0, baseCost: 1200000, multiplier: 1.25, production: 350 },
-        planet: { count: 0, baseCost: 3600000, multiplier: 1.25, production: 800 },
-        galaxy: { count: 0, baseCost: 11000000, multiplier: 1.25, production: 1800 },
+        seedling: { count: 0, baseCost: 25, multiplier: 1.2, production: 0.2 },
+        grandma: { count: 0, baseCost: 80, multiplier: 1.25, production: 0.5 },
+        gardener: { count: 0, baseCost: 200, multiplier: 1.25, production: 1.2 },
+        farm: { count: 0, baseCost: 600, multiplier: 1.25, production: 3 },
+        greenhouse: { count: 0, baseCost: 1800, multiplier: 1.25, production: 7 },
+        factory: { count: 0, baseCost: 5000, multiplier: 1.25, production: 18 },
+        plantation: { count: 0, baseCost: 15000, multiplier: 1.25, production: 45 },
+        mine: { count: 0, baseCost: 45000, multiplier: 1.25, production: 110 },
+        biolab: { count: 0, baseCost: 130000, multiplier: 1.25, production: 260 },
+        megafarm: { count: 0, baseCost: 400000, multiplier: 1.25, production: 650 },
+        continent: { count: 0, baseCost: 1200000, multiplier: 1.25, production: 1600 },
+        planet: { count: 0, baseCost: 3600000, multiplier: 1.25, production: 4000 },
+        galaxy: { count: 0, baseCost: 11000000, multiplier: 1.25, production: 10000 },
         // Advanced upgrades
-        alchemist: { count: 0, baseCost: 50000, multiplier: 1.25, production: 22 },
-        wizard: { count: 0, baseCost: 150000, multiplier: 1.25, production: 50 },
-        sorcerer: { count: 0, baseCost: 450000, multiplier: 1.25, production: 120 },
-        portal: { count: 0, baseCost: 1300000, multiplier: 1.25, production: 280 },
-        dimensionalRift: { count: 0, baseCost: 4000000, multiplier: 1.25, production: 650 },
-        timeMachine: { count: 0, baseCost: 12000000, multiplier: 1.25, production: 1500 },
-        quantumComputer: { count: 0, baseCost: 36000000, multiplier: 1.25, production: 3500 },
-        blackHole: { count: 0, baseCost: 110000000, multiplier: 1.25, production: 8000 },
-        multiverse: { count: 0, baseCost: 330000000, multiplier: 1.25, production: 18000 },
-        realityBender: { count: 0, baseCost: 1000000000, multiplier: 1.25, production: 42000 },
-        godMode: { count: 0, baseCost: 3000000000, multiplier: 1.25, production: 95000 },
-        transcendence: { count: 0, baseCost: 9000000000, multiplier: 1.25, production: 220000 },
-        infinity: { count: 0, baseCost: 27000000000, multiplier: 1.25, production: 500000 }
+        alchemist: { count: 0, baseCost: 50000, multiplier: 1.25, production: 90 },
+        wizard: { count: 0, baseCost: 150000, multiplier: 1.25, production: 220 },
+        sorcerer: { count: 0, baseCost: 450000, multiplier: 1.25, production: 550 },
+        portal: { count: 0, baseCost: 1300000, multiplier: 1.25, production: 1300 },
+        dimensionalRift: { count: 0, baseCost: 4000000, multiplier: 1.25, production: 3200 },
+        timeMachine: { count: 0, baseCost: 12000000, multiplier: 1.25, production: 8000 },
+        quantumComputer: { count: 0, baseCost: 36000000, multiplier: 1.25, production: 20000 },
+        blackHole: { count: 0, baseCost: 110000000, multiplier: 1.25, production: 50000 },
+        multiverse: { count: 0, baseCost: 330000000, multiplier: 1.25, production: 120000 },
+        realityBender: { count: 0, baseCost: 1000000000, multiplier: 1.25, production: 300000 },
+        godMode: { count: 0, baseCost: 3000000000, multiplier: 1.25, production: 750000 },
+        transcendence: { count: 0, baseCost: 9000000000, multiplier: 1.25, production: 1800000 },
+        infinity: { count: 0, baseCost: 27000000000, multiplier: 1.25, production: 4500000 }
     }
 };
 
@@ -96,19 +96,15 @@ beanButton.addEventListener('click', (e) => {
 
 // Create floating text effect on click
 function createClickEffect(e) {
-    const rect = beanButton.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    
-    const clickText = document.createElement('div');
+   const clickText = document.createElement('div');
     clickText.className = 'click-text';
     clickText.textContent = `+${gameState.beansPerClick}`;
-    clickText.style.left = `${x}px`;
-    clickText.style.top = `${y}px`;
-    
-    clickEffectContainer.appendChild(clickText);
-    
-    // Remove after animation
+    clickText.style.left = `${e.clientX}px`;
+    clickText.style.top = `${e.clientY}px`;
+    clickText.style.position = 'fixed'; // key change
+
+    document.body.appendChild(clickText); // append to body, not just clickEffectContainer
+
     setTimeout(() => {
         clickText.remove();
     }, 1000);
@@ -160,19 +156,71 @@ function updateDisplay() {
     });
 }
 
+// Check if an upgrade is unlocked
+function isUpgradeUnlocked(upgradeType) {
+    // Define upgrade order for each category
+    const clickingOrder = ['cursor', 'cursor2', 'reinforcedFinger', 'ironFist', 'goldenTouch', 
+                          'diamondHand', 'titanicGrip', 'cosmicPointer', 'divineClick', 
+                          'omnipotentTouch', 'infiniteFinger', 'universalClicker', 'quantumHand'];
+    
+    const productionOrder = ['seedling', 'grandma', 'gardener', 'farm', 'greenhouse', 
+                            'factory', 'plantation', 'mine', 'biolab', 'megafarm', 
+                            'continent', 'planet', 'galaxy'];
+    
+    const advancedOrder = ['alchemist', 'wizard', 'sorcerer', 'portal', 'dimensionalRift', 
+                          'timeMachine', 'quantumComputer', 'blackHole', 'multiverse', 
+                          'realityBender', 'godMode', 'transcendence', 'infinity'];
+    
+    // Determine which order this upgrade belongs to
+    let order = null;
+    let index = -1;
+    
+    if (clickingOrder.includes(upgradeType)) {
+        order = clickingOrder;
+        index = clickingOrder.indexOf(upgradeType);
+    } else if (productionOrder.includes(upgradeType)) {
+        order = productionOrder;
+        index = productionOrder.indexOf(upgradeType);
+    } else if (advancedOrder.includes(upgradeType)) {
+        order = advancedOrder;
+        index = advancedOrder.indexOf(upgradeType);
+    }
+    
+    // First upgrade in any category is always unlocked
+    if (index === 0) return true;
+    
+    // Check if previous upgrade has been purchased
+    if (index > 0 && order) {
+        const previousUpgrade = order[index - 1];
+        return gameState.upgrades[previousUpgrade].count > 0;
+    }
+    
+    return true;
+}
+
 // Update upgrade button states
 function updateUpgradeButtons() {
     buyButtons.forEach(button => {
         const upgradeType = button.getAttribute('data-upgrade');
         const cost = getUpgradeCost(upgradeType);
         const card = button.closest('.upgrade-card');
+        const isUnlocked = isUpgradeUnlocked(upgradeType);
         
-        if (gameState.beans >= cost) {
-            button.disabled = false;
-            card.classList.remove('disabled');
-        } else {
+        if (!isUnlocked) {
+            // Upgrade is locked
             button.disabled = true;
             card.classList.add('disabled');
+            card.classList.add('locked');
+        } else if (gameState.beans >= cost) {
+            // Upgrade is unlocked and affordable
+            button.disabled = false;
+            card.classList.remove('disabled');
+            card.classList.remove('locked');
+        } else {
+            // Upgrade is unlocked but not affordable
+            button.disabled = true;
+            card.classList.add('disabled');
+            card.classList.remove('locked');
         }
     });
 }
@@ -246,47 +294,47 @@ function resetGame() {
             beansPerSecond: 0,
             upgrades: {
                 // Clicking upgrades
-                cursor: { count: 0, baseCost: 10, multiplier: 1.2, clickBonus: 0.05 },
-                cursor2: { count: 0, baseCost: 30, multiplier: 1.25, clickBonus: 0.1 },
-                reinforcedFinger: { count: 0, baseCost: 100, multiplier: 1.25, clickBonus: 0.3 },
-                ironFist: { count: 0, baseCost: 250, multiplier: 1.3, clickBonus: 0.7 },
-                goldenTouch: { count: 0, baseCost: 800, multiplier: 1.3, clickBonus: 1.5 },
-                diamondHand: { count: 0, baseCost: 2500, multiplier: 1.35, clickBonus: 3 },
-                titanicGrip: { count: 0, baseCost: 8000, multiplier: 1.35, clickBonus: 6 },
-                cosmicPointer: { count: 0, baseCost: 25000, multiplier: 1.35, clickBonus: 12 },
-                divineClick: { count: 0, baseCost: 80000, multiplier: 1.4, clickBonus: 25 },
-                omnipotentTouch: { count: 0, baseCost: 250000, multiplier: 1.4, clickBonus: 50 },
-                infiniteFinger: { count: 0, baseCost: 800000, multiplier: 1.4, clickBonus: 100 },
-                universalClicker: { count: 0, baseCost: 2500000, multiplier: 1.4, clickBonus: 200 },
-                quantumHand: { count: 0, baseCost: 8000000, multiplier: 1.45, clickBonus: 400 },
+                cursor: { count: 0, baseCost: 10, multiplier: 1.2, clickBonus: 0.2 },
+                cursor2: { count: 0, baseCost: 30, multiplier: 1.25, clickBonus: 0.5 },
+                reinforcedFinger: { count: 0, baseCost: 100, multiplier: 1.25, clickBonus: 1 },
+                ironFist: { count: 0, baseCost: 250, multiplier: 1.3, clickBonus: 2 },
+                goldenTouch: { count: 0, baseCost: 800, multiplier: 1.3, clickBonus: 4 },
+                diamondHand: { count: 0, baseCost: 2500, multiplier: 1.35, clickBonus: 8 },
+                titanicGrip: { count: 0, baseCost: 8000, multiplier: 1.35, clickBonus: 16 },
+                cosmicPointer: { count: 0, baseCost: 25000, multiplier: 1.35, clickBonus: 32 },
+                divineClick: { count: 0, baseCost: 80000, multiplier: 1.4, clickBonus: 64 },
+                omnipotentTouch: { count: 0, baseCost: 250000, multiplier: 1.4, clickBonus: 128 },
+                infiniteFinger: { count: 0, baseCost: 800000, multiplier: 1.4, clickBonus: 256 },
+                universalClicker: { count: 0, baseCost: 2500000, multiplier: 1.4, clickBonus: 512 },
+                quantumHand: { count: 0, baseCost: 8000000, multiplier: 1.45, clickBonus: 1024 },
                 // Production upgrades
-                seedling: { count: 0, baseCost: 25, multiplier: 1.2, production: 0.05 },
-                grandma: { count: 0, baseCost: 80, multiplier: 1.25, production: 0.15 },
-                gardener: { count: 0, baseCost: 200, multiplier: 1.25, production: 0.4 },
-                farm: { count: 0, baseCost: 600, multiplier: 1.25, production: 0.8 },
-                greenhouse: { count: 0, baseCost: 1800, multiplier: 1.25, production: 2 },
-                factory: { count: 0, baseCost: 5000, multiplier: 1.25, production: 5 },
-                plantation: { count: 0, baseCost: 15000, multiplier: 1.25, production: 12 },
-                mine: { count: 0, baseCost: 45000, multiplier: 1.25, production: 28 },
-                biolab: { count: 0, baseCost: 130000, multiplier: 1.25, production: 65 },
-                megafarm: { count: 0, baseCost: 400000, multiplier: 1.25, production: 150 },
-                continent: { count: 0, baseCost: 1200000, multiplier: 1.25, production: 350 },
-                planet: { count: 0, baseCost: 3600000, multiplier: 1.25, production: 800 },
-                galaxy: { count: 0, baseCost: 11000000, multiplier: 1.25, production: 1800 },
+                seedling: { count: 0, baseCost: 25, multiplier: 1.2, production: 0.2 },
+                grandma: { count: 0, baseCost: 80, multiplier: 1.25, production: 0.5 },
+                gardener: { count: 0, baseCost: 200, multiplier: 1.25, production: 1.2 },
+                farm: { count: 0, baseCost: 600, multiplier: 1.25, production: 3 },
+                greenhouse: { count: 0, baseCost: 1800, multiplier: 1.25, production: 7 },
+                factory: { count: 0, baseCost: 5000, multiplier: 1.25, production: 18 },
+                plantation: { count: 0, baseCost: 15000, multiplier: 1.25, production: 45 },
+                mine: { count: 0, baseCost: 45000, multiplier: 1.25, production: 110 },
+                biolab: { count: 0, baseCost: 130000, multiplier: 1.25, production: 260 },
+                megafarm: { count: 0, baseCost: 400000, multiplier: 1.25, production: 650 },
+                continent: { count: 0, baseCost: 1200000, multiplier: 1.25, production: 1600 },
+                planet: { count: 0, baseCost: 3600000, multiplier: 1.25, production: 4000 },
+                galaxy: { count: 0, baseCost: 11000000, multiplier: 1.25, production: 10000 },
                 // Advanced upgrades
-                alchemist: { count: 0, baseCost: 50000, multiplier: 1.25, production: 22 },
-                wizard: { count: 0, baseCost: 150000, multiplier: 1.25, production: 50 },
-                sorcerer: { count: 0, baseCost: 450000, multiplier: 1.25, production: 120 },
-                portal: { count: 0, baseCost: 1300000, multiplier: 1.25, production: 280 },
-                dimensionalRift: { count: 0, baseCost: 4000000, multiplier: 1.25, production: 650 },
-                timeMachine: { count: 0, baseCost: 12000000, multiplier: 1.25, production: 1500 },
-                quantumComputer: { count: 0, baseCost: 36000000, multiplier: 1.25, production: 3500 },
-                blackHole: { count: 0, baseCost: 110000000, multiplier: 1.25, production: 8000 },
-                multiverse: { count: 0, baseCost: 330000000, multiplier: 1.25, production: 18000 },
-                realityBender: { count: 0, baseCost: 1000000000, multiplier: 1.25, production: 42000 },
-                godMode: { count: 0, baseCost: 3000000000, multiplier: 1.25, production: 95000 },
-                transcendence: { count: 0, baseCost: 9000000000, multiplier: 1.25, production: 220000 },
-                infinity: { count: 0, baseCost: 27000000000, multiplier: 1.25, production: 500000 }
+                alchemist: { count: 0, baseCost: 50000, multiplier: 1.25, production: 90 },
+                wizard: { count: 0, baseCost: 150000, multiplier: 1.25, production: 220 },
+                sorcerer: { count: 0, baseCost: 450000, multiplier: 1.25, production: 550 },
+                portal: { count: 0, baseCost: 1300000, multiplier: 1.25, production: 1300 },
+                dimensionalRift: { count: 0, baseCost: 4000000, multiplier: 1.25, production: 3200 },
+                timeMachine: { count: 0, baseCost: 12000000, multiplier: 1.25, production: 8000 },
+                quantumComputer: { count: 0, baseCost: 36000000, multiplier: 1.25, production: 20000 },
+                blackHole: { count: 0, baseCost: 110000000, multiplier: 1.25, production: 50000 },
+                multiverse: { count: 0, baseCost: 330000000, multiplier: 1.25, production: 120000 },
+                realityBender: { count: 0, baseCost: 1000000000, multiplier: 1.25, production: 300000 },
+                godMode: { count: 0, baseCost: 3000000000, multiplier: 1.25, production: 750000 },
+                transcendence: { count: 0, baseCost: 9000000000, multiplier: 1.25, production: 1800000 },
+                infinity: { count: 0, baseCost: 27000000000, multiplier: 1.25, production: 4500000 }
             }
         };
         
@@ -322,3 +370,11 @@ resetButton.addEventListener('click', resetGame);
 
 // Initialize game when page loads
 init();
+
+// Cheat: Press 'p' to get 1 quadrillion beans
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'p' || e.key === 'P') {
+        gameState.beans += 1000000000000000;
+        updateDisplay();
+    }
+});

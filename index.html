@@ -14,29 +14,38 @@
         </header>
 
         <main>
-            <div class="stats-panel">
-                <div class="stat">
-                    <span class="stat-label">Total Beans:</span>
-                    <span class="stat-value" id="beanCount">0</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-label">Beans per Second:</span>
-                    <span class="stat-value" id="beansPerSecond">0</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-label">Beans per Click:</span>
-                    <span class="stat-value" id="beansPerClick">1</span>
-                </div>
-            </div>
+            <div class="game-container">
+                <div class="left-panel">
+                    <div class="stats-panel">
+                        <div class="stat">
+                            <span class="stat-label">Total Beans:</span>
+                            <span class="stat-value" id="beanCount">0</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Beans per Second:</span>
+                            <span class="stat-value" id="beansPerSecond">0</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Beans per Click:</span>
+                            <span class="stat-value" id="beansPerClick">1</span>
+                        </div>
+                    </div>
 
-            <div class="click-area">
-                <button id="beanButton" class="bean-button">
-                    🫘
-                </button>
-                <div id="clickEffect"></div>
-            </div>
+                    <div class="click-area">
+                        <button id="beanButton" class="bean-button">
+                            🫘
+                        </button>
+                        <div id="clickEffect"></div>
+                    </div>
 
-            <div class="upgrades-section">
+                    <div class="actions">
+                        <button id="saveButton" class="action-button">💾 Save Game</button>
+                        <button id="resetButton" class="action-button reset">🔄 Reset Game</button>
+                    </div>
+                </div>
+
+                <div class="right-panel">
+                    <div class="upgrades-section">
                 <h2>🛒 Upgrades</h2>
                 
                 <div class="tabs">
@@ -52,7 +61,7 @@
                             <div class="upgrade-icon">☝️</div>
                             <div class="upgrade-info">
                                 <h3>Cursor</h3>
-                                <p class="upgrade-description">+0.05 beans per click</p>
+                                <p class="upgrade-description">+0.2 beans per click</p>
                                 <p class="upgrade-cost">Cost: <span id="cost-cursor">10</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-cursor">0</span></p>
                             </div>
@@ -63,7 +72,7 @@
                             <div class="upgrade-icon">👆</div>
                             <div class="upgrade-info">
                                 <h3>Better Cursor</h3>
-                                <p class="upgrade-description">+0.1 beans per click</p>
+                                <p class="upgrade-description">+0.5 beans per click</p>
                                 <p class="upgrade-cost">Cost: <span id="cost-cursor2">30</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-cursor2">0</span></p>
                             </div>
@@ -74,7 +83,7 @@
                             <div class="upgrade-icon">💪</div>
                             <div class="upgrade-info">
                                 <h3>Reinforced Finger</h3>
-                                <p class="upgrade-description">+0.3 beans per click</p>
+                                <p class="upgrade-description">+1 bean per click</p>
                                 <p class="upgrade-cost">Cost: <span id="cost-reinforcedFinger">100</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-reinforcedFinger">0</span></p>
                             </div>
@@ -85,7 +94,7 @@
                             <div class="upgrade-icon">✊</div>
                             <div class="upgrade-info">
                                 <h3>Iron Fist</h3>
-                                <p class="upgrade-description">+0.7 beans per click</p>
+                                <p class="upgrade-description">+2 beans per click</p>
                                 <p class="upgrade-cost">Cost: <span id="cost-ironFist">250</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-ironFist">0</span></p>
                             </div>
@@ -96,7 +105,7 @@
                             <div class="upgrade-icon">✨</div>
                             <div class="upgrade-info">
                                 <h3>Golden Touch</h3>
-                                <p class="upgrade-description">+1.5 beans per click</p>
+                                <p class="upgrade-description">+4 beans per click</p>
                                 <p class="upgrade-cost">Cost: <span id="cost-goldenTouch">800</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-goldenTouch">0</span></p>
                             </div>
@@ -107,7 +116,7 @@
                             <div class="upgrade-icon">💎</div>
                             <div class="upgrade-info">
                                 <h3>Diamond Hand</h3>
-                                <p class="upgrade-description">+3 beans per click</p>
+                                <p class="upgrade-description">+8 beans per click</p>
                                 <p class="upgrade-cost">Cost: <span id="cost-diamondHand">2500</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-diamondHand">0</span></p>
                             </div>
@@ -118,7 +127,7 @@
                             <div class="upgrade-icon">🦾</div>
                             <div class="upgrade-info">
                                 <h3>Titanic Grip</h3>
-                                <p class="upgrade-description">+6 beans per click</p>
+                                <p class="upgrade-description">+16 beans per click</p>
                                 <p class="upgrade-cost">Cost: <span id="cost-titanicGrip">8000</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-titanicGrip">0</span></p>
                             </div>
@@ -129,7 +138,7 @@
                             <div class="upgrade-icon">🌟</div>
                             <div class="upgrade-info">
                                 <h3>Cosmic Pointer</h3>
-                                <p class="upgrade-description">+12 beans per click</p>
+                                <p class="upgrade-description">+32 beans per click</p>
                                 <p class="upgrade-cost">Cost: <span id="cost-cosmicPointer">25000</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-cosmicPointer">0</span></p>
                             </div>
@@ -140,7 +149,7 @@
                             <div class="upgrade-icon">⚡</div>
                             <div class="upgrade-info">
                                 <h3>Divine Click</h3>
-                                <p class="upgrade-description">+25 beans per click</p>
+                                <p class="upgrade-description">+64 beans per click</p>
                                 <p class="upgrade-cost">Cost: <span id="cost-divineClick">80000</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-divineClick">0</span></p>
                             </div>
@@ -151,7 +160,7 @@
                             <div class="upgrade-icon">🔥</div>
                             <div class="upgrade-info">
                                 <h3>Omnipotent Touch</h3>
-                                <p class="upgrade-description">+50 beans per click</p>
+                                <p class="upgrade-description">+128 beans per click</p>
                                 <p class="upgrade-cost">Cost: <span id="cost-omnipotentTouch">250000</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-omnipotentTouch">0</span></p>
                             </div>
@@ -162,7 +171,7 @@
                             <div class="upgrade-icon">♾️</div>
                             <div class="upgrade-info">
                                 <h3>Infinite Finger</h3>
-                                <p class="upgrade-description">+100 beans per click</p>
+                                <p class="upgrade-description">+256 beans per click</p>
                                 <p class="upgrade-cost">Cost: <span id="cost-infiniteFinger">800000</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-infiniteFinger">0</span></p>
                             </div>
@@ -173,7 +182,7 @@
                             <div class="upgrade-icon">🌌</div>
                             <div class="upgrade-info">
                                 <h3>Universal Clicker</h3>
-                                <p class="upgrade-description">+200 beans per click</p>
+                                <p class="upgrade-description">+512 beans per click</p>
                                 <p class="upgrade-cost">Cost: <span id="cost-universalClicker">2500000</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-universalClicker">0</span></p>
                             </div>
@@ -184,7 +193,7 @@
                             <div class="upgrade-icon">⚛️</div>
                             <div class="upgrade-info">
                                 <h3>Quantum Hand</h3>
-                                <p class="upgrade-description">+400 beans per click</p>
+                                <p class="upgrade-description">+1024 beans per click</p>
                                 <p class="upgrade-cost">Cost: <span id="cost-quantumHand">8000000</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-quantumHand">0</span></p>
                             </div>
@@ -200,7 +209,7 @@
                             <div class="upgrade-icon">🌱</div>
                             <div class="upgrade-info">
                                 <h3>Seedling</h3>
-                                <p class="upgrade-description">+0.05 beans/sec</p>
+                                <p class="upgrade-description">+0.2 beans/sec</p>
                                 <p class="upgrade-cost">Cost: <span id="cost-seedling">25</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-seedling">0</span></p>
                             </div>
@@ -211,7 +220,7 @@
                             <div class="upgrade-icon">👵</div>
                             <div class="upgrade-info">
                                 <h3>Bean Grandma</h3>
-                                <p class="upgrade-description">+0.15 beans/sec</p>
+                                <p class="upgrade-description">+0.5 beans/sec</p>
                                 <p class="upgrade-cost">Cost: <span id="cost-grandma">80</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-grandma">0</span></p>
                             </div>
@@ -222,7 +231,7 @@
                             <div class="upgrade-icon">👨‍🌾</div>
                             <div class="upgrade-info">
                                 <h3>Gardener</h3>
-                                <p class="upgrade-description">+0.4 beans/sec</p>
+                                <p class="upgrade-description">+1.2 beans/sec</p>
                                 <p class="upgrade-cost">Cost: <span id="cost-gardener">200</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-gardener">0</span></p>
                             </div>
@@ -233,7 +242,7 @@
                             <div class="upgrade-icon">🌾</div>
                             <div class="upgrade-info">
                                 <h3>Bean Farm</h3>
-                                <p class="upgrade-description">+0.8 beans/sec</p>
+                                <p class="upgrade-description">+3 beans/sec</p>
                                 <p class="upgrade-cost">Cost: <span id="cost-farm">600</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-farm">0</span></p>
                             </div>
@@ -244,7 +253,7 @@
                             <div class="upgrade-icon">🏡</div>
                             <div class="upgrade-info">
                                 <h3>Greenhouse</h3>
-                                <p class="upgrade-description">+2 beans/sec</p>
+                                <p class="upgrade-description">+7 beans/sec</p>
                                 <p class="upgrade-cost">Cost: <span id="cost-greenhouse">1800</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-greenhouse">0</span></p>
                             </div>
@@ -255,7 +264,7 @@
                             <div class="upgrade-icon">🏭</div>
                             <div class="upgrade-info">
                                 <h3>Bean Factory</h3>
-                                <p class="upgrade-description">+5 beans/sec</p>
+                                <p class="upgrade-description">+18 beans/sec</p>
                                 <p class="upgrade-cost">Cost: <span id="cost-factory">5000</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-factory">0</span></p>
                             </div>
@@ -266,7 +275,7 @@
                             <div class="upgrade-icon">🌳</div>
                             <div class="upgrade-info">
                                 <h3>Plantation</h3>
-                                <p class="upgrade-description">+12 beans/sec</p>
+                                <p class="upgrade-description">+45 beans/sec</p>
                                 <p class="upgrade-cost">Cost: <span id="cost-plantation">15000</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-plantation">0</span></p>
                             </div>
@@ -277,7 +286,7 @@
                             <div class="upgrade-icon">⛏️</div>
                             <div class="upgrade-info">
                                 <h3>Bean Mine</h3>
-                                <p class="upgrade-description">+28 beans/sec</p>
+                                <p class="upgrade-description">+110 beans/sec</p>
                                 <p class="upgrade-cost">Cost: <span id="cost-mine">45000</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-mine">0</span></p>
                             </div>
@@ -288,7 +297,7 @@
                             <div class="upgrade-icon">🧬</div>
                             <div class="upgrade-info">
                                 <h3>Bio Lab</h3>
-                                <p class="upgrade-description">+65 beans/sec</p>
+                                <p class="upgrade-description">+260 beans/sec</p>
                                 <p class="upgrade-cost">Cost: <span id="cost-biolab">130000</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-biolab">0</span></p>
                             </div>
@@ -299,7 +308,7 @@
                             <div class="upgrade-icon">🚜</div>
                             <div class="upgrade-info">
                                 <h3>Mega Farm</h3>
-                                <p class="upgrade-description">+150 beans/sec</p>
+                                <p class="upgrade-description">+650 beans/sec</p>
                                 <p class="upgrade-cost">Cost: <span id="cost-megafarm">400000</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-megafarm">0</span></p>
                             </div>
@@ -310,7 +319,7 @@
                             <div class="upgrade-icon">🗺️</div>
                             <div class="upgrade-info">
                                 <h3>Continent Farm</h3>
-                                <p class="upgrade-description">+350 beans/sec</p>
+                                <p class="upgrade-description">+1600 beans/sec</p>
                                 <p class="upgrade-cost">Cost: <span id="cost-continent">1200000</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-continent">0</span></p>
                             </div>
@@ -321,7 +330,7 @@
                             <div class="upgrade-icon">🌍</div>
                             <div class="upgrade-info">
                                 <h3>Planet Farm</h3>
-                                <p class="upgrade-description">+800 beans/sec</p>
+                                <p class="upgrade-description">+4000 beans/sec</p>
                                 <p class="upgrade-cost">Cost: <span id="cost-planet">3600000</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-planet">0</span></p>
                             </div>
@@ -332,7 +341,7 @@
                             <div class="upgrade-icon">🌌</div>
                             <div class="upgrade-info">
                                 <h3>Galaxy Farm</h3>
-                                <p class="upgrade-description">+1800 beans/sec</p>
+                                <p class="upgrade-description">+10000 beans/sec</p>
                                 <p class="upgrade-cost">Cost: <span id="cost-galaxy">11000000</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-galaxy">0</span></p>
                             </div>
@@ -348,7 +357,7 @@
                             <div class="upgrade-icon">⚗️</div>
                             <div class="upgrade-info">
                                 <h3>Alchemist</h3>
-                                <p class="upgrade-description">+22 beans/sec</p>
+                                <p class="upgrade-description">+90 beans/sec</p>
                                 <p class="upgrade-cost">Cost: <span id="cost-alchemist">50000</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-alchemist">0</span></p>
                             </div>
@@ -359,7 +368,7 @@
                             <div class="upgrade-icon">🧙</div>
                             <div class="upgrade-info">
                                 <h3>Bean Wizard</h3>
-                                <p class="upgrade-description">+50 beans/sec</p>
+                                <p class="upgrade-description">+220 beans/sec</p>
                                 <p class="upgrade-cost">Cost: <span id="cost-wizard">150000</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-wizard">0</span></p>
                             </div>
@@ -370,7 +379,7 @@
                             <div class="upgrade-icon">🔮</div>
                             <div class="upgrade-info">
                                 <h3>Sorcerer</h3>
-                                <p class="upgrade-description">+120 beans/sec</p>
+                                <p class="upgrade-description">+550 beans/sec</p>
                                 <p class="upgrade-cost">Cost: <span id="cost-sorcerer">450000</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-sorcerer">0</span></p>
                             </div>
@@ -381,7 +390,7 @@
                             <div class="upgrade-icon">🌀</div>
                             <div class="upgrade-info">
                                 <h3>Bean Portal</h3>
-                                <p class="upgrade-description">+280 beans/sec</p>
+                                <p class="upgrade-description">+1300 beans/sec</p>
                                 <p class="upgrade-cost">Cost: <span id="cost-portal">1300000</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-portal">0</span></p>
                             </div>
@@ -392,7 +401,7 @@
                             <div class="upgrade-icon">🕳️</div>
                             <div class="upgrade-info">
                                 <h3>Dimensional Rift</h3>
-                                <p class="upgrade-description">+650 beans/sec</p>
+                                <p class="upgrade-description">+3200 beans/sec</p>
                                 <p class="upgrade-cost">Cost: <span id="cost-dimensionalRift">4000000</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-dimensionalRift">0</span></p>
                             </div>
@@ -403,7 +412,7 @@
                             <div class="upgrade-icon">⏰</div>
                             <div class="upgrade-info">
                                 <h3>Time Machine</h3>
-                                <p class="upgrade-description">+1500 beans/sec</p>
+                                <p class="upgrade-description">+8000 beans/sec</p>
                                 <p class="upgrade-cost">Cost: <span id="cost-timeMachine">12000000</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-timeMachine">0</span></p>
                             </div>
@@ -414,7 +423,7 @@
                             <div class="upgrade-icon">💻</div>
                             <div class="upgrade-info">
                                 <h3>Quantum Computer</h3>
-                                <p class="upgrade-description">+3500 beans/sec</p>
+                                <p class="upgrade-description">+20000 beans/sec</p>
                                 <p class="upgrade-cost">Cost: <span id="cost-quantumComputer">36000000</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-quantumComputer">0</span></p>
                             </div>
@@ -425,7 +434,7 @@
                             <div class="upgrade-icon">⚫</div>
                             <div class="upgrade-info">
                                 <h3>Black Hole</h3>
-                                <p class="upgrade-description">+8000 beans/sec</p>
+                                <p class="upgrade-description">+50000 beans/sec</p>
                                 <p class="upgrade-cost">Cost: <span id="cost-blackHole">110000000</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-blackHole">0</span></p>
                             </div>
@@ -436,7 +445,7 @@
                             <div class="upgrade-icon">🎆</div>
                             <div class="upgrade-info">
                                 <h3>Multiverse</h3>
-                                <p class="upgrade-description">+18000 beans/sec</p>
+                                <p class="upgrade-description">+120000 beans/sec</p>
                                 <p class="upgrade-cost">Cost: <span id="cost-multiverse">330000000</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-multiverse">0</span></p>
                             </div>
@@ -447,7 +456,7 @@
                             <div class="upgrade-icon">🌠</div>
                             <div class="upgrade-info">
                                 <h3>Reality Bender</h3>
-                                <p class="upgrade-description">+42000 beans/sec</p>
+                                <p class="upgrade-description">+300000 beans/sec</p>
                                 <p class="upgrade-cost">Cost: <span id="cost-realityBender">1000000000</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-realityBender">0</span></p>
                             </div>
@@ -458,7 +467,7 @@
                             <div class="upgrade-icon">👁️</div>
                             <div class="upgrade-info">
                                 <h3>God Mode</h3>
-                                <p class="upgrade-description">+95000 beans/sec</p>
+                                <p class="upgrade-description">+750000 beans/sec</p>
                                 <p class="upgrade-cost">Cost: <span id="cost-godMode">3000000000</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-godMode">0</span></p>
                             </div>
@@ -469,7 +478,7 @@
                             <div class="upgrade-icon">✝️</div>
                             <div class="upgrade-info">
                                 <h3>Transcendence</h3>
-                                <p class="upgrade-description">+220000 beans/sec</p>
+                                <p class="upgrade-description">+1800000 beans/sec</p>
                                 <p class="upgrade-cost">Cost: <span id="cost-transcendence">9000000000</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-transcendence">0</span></p>
                             </div>
@@ -480,7 +489,7 @@
                             <div class="upgrade-icon">♾️</div>
                             <div class="upgrade-info">
                                 <h3>Infinity</h3>
-                                <p class="upgrade-description">+500000 beans/sec</p>
+                                <p class="upgrade-description">+4500000 beans/sec</p>
                                 <p class="upgrade-cost">Cost: <span id="cost-infinity">27000000000</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-infinity">0</span></p>
                             </div>
@@ -488,11 +497,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="actions">
-                <button id="saveButton" class="action-button">💾 Save Game</button>
-                <button id="resetButton" class="action-button reset">🔄 Reset Game</button>
+                    </div>
+                </div>
             </div>
         </main>
     </div>
