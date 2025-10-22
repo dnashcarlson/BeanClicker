@@ -73,9 +73,17 @@
                     <div id="activeBoosts" class="active-boosts-sidebar"></div>
                 </div>
 
-                <!-- Mechanics Panel (Middle) -->
-                <div class="middle-panel">
-                    <div class="mechanics-section">
+                <!-- Main Content Panel (Right) -->
+                <div class="right-panel">
+                    <!-- Main Section Tabs -->
+                    <div class="main-section-tabs">
+                        <button class="main-section-tab active" data-section="mechanics">✨ Mechanics</button>
+                        <button class="main-section-tab" data-section="upgrades">🛒 Upgrades</button>
+                        <button class="main-section-tab" data-section="paradigm">🌀 Paradigm Shift</button>
+                    </div>
+
+                    <!-- Mechanics Section -->
+                    <div class="section-content active" id="section-mechanics">
                         <h2 class="panel-title">✨ Mechanics</h2>
                         
                         <!-- Mechanics Tabs -->
@@ -96,7 +104,7 @@
                                     <button onclick="activateBoost('productionBoost')" class="boost-button">Activate</button>
                                 </div>
                                 <div class="boost-card">
-                                    <div class="boost-icon">�</div>
+                                    <div class="boost-icon">💥</div>
                                     <h4>3x Click Power</h4>
                                     <p>20s duration, 90s cooldown</p>
                                     <button onclick="activateBoost('clickBoost')" class="boost-button">Activate</button>
@@ -131,13 +139,9 @@
                             <div id="achievementList" class="achievements-list"></div>
                         </div>
                     </div>
-                </div>
 
-                <div class="right-panel">
-                    <h2 class="panel-title">🛒 Upgrades</h2>
-                    
-                    <!-- Upgrades Tabs -->
-                    <div class="main-tab-content active" id="main-upgrades">
+                    <!-- Upgrades Section -->
+                    <div class="section-content" id="section-upgrades">
                         <div class="upgrades-section">
                             <div class="tabs">
                                 <button class="tab-button active" data-tab="clicking">👆 Clicking</button>
@@ -590,6 +594,17 @@
                         </div>
                     </div>
                 </div>
+                    </div>
+
+                    <!-- Paradigm Shift Section -->
+                    <div class="section-content" id="section-paradigm">
+                        <h2 class="panel-title">🌀 Paradigm Shift</h2>
+                        <div class="paradigm-shift-section" style="margin-top: 30px;">
+                            <h3>🌀 Paradigm Shift</h3>
+                            <p class="paradigm-info">Reset progress for permanent bonuses!</p>
+                            <p class="paradigm-gain">Next shift: <span id="paradigmGain">0</span> shifts</p>
+                            <p class="paradigm-bonus">Current bonus: <span id="paradigmBonus">+0%</span> to all production</p>
+                            <button id="paradigmButton" class="action-button paradigm">🌀 Paradigm Shift</button>
                         </div>
                     </div>
                 </div>

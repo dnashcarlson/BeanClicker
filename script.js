@@ -111,6 +111,7 @@ function getUpgradeCost(upgradeType) {
 }
 
 function formatNumber(num) {
+    if (num >= 1000000000000) return (num / 1000000000000).toFixed(2) + 'T';
     if (num >= 1000000000) return (num / 1000000000).toFixed(2) + 'B';
     if (num >= 1000000) return (num / 1000000).toFixed(2) + 'M';
     if (num >= 1000) return (num / 1000).toFixed(2) + 'K';
@@ -134,10 +135,51 @@ function handleBeanClick() {
     const beanButton = document.getElementById('beanButton');
     if (beanButton) {
         beanButton.style.transform = 'scale(0.9)';
+        
+        // Add combo glow effect
+        if (gameState.comboMultiplier > 1) {
+            const glowIntensity = Math.min(gameState.comboMultiplier * 20, 60);
+            beanButton.style.filter = `drop-shadow(0 0 ${glowIntensity}px rgba(255, 215, 0, 1)) brightness(${1 + gameState.comboMultiplier * 0.1})`;
+            
+            // Bean bounce for high combos
+            if (gameState.comboMultiplier >= 5) {
+                beanButton.classList.add('bean-bounce');
+                setTimeout(() => beanButton.classList.remove('bean-bounce'), 600);
+            }
+        }
+        
         setTimeout(() => {
             beanButton.style.transform = '';
         }, 100);
     }
+    
+    // Add stat value animation
+    const beanCountEl = document.getElementById('beanCount');
+    if (beanCountEl) {
+        beanCountEl.classList.add('updated');
+        setTimeout(() => beanCountEl.classList.remove('updated'), 300);
+    }
+}
+
+// Add cursor trail when combo is active
+let trailEnabled = true; // Always enabled now
+document.addEventListener('mousemove', (e) => {
+    if (trailEnabled) {
+        createCursorTrail(e.clientX, e.clientY);
+    }
+});
+
+function createCursorTrail(x, y) {
+    const trail = document.createElement('div');
+    trail.className = 'cursor-trail';
+    trail.style.left = x + 'px';
+    trail.style.top = y + 'px';
+    
+    const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#ffa07a', '#98d8c8', '#f7dc6f'];
+    trail.style.background = colors[Math.floor(Math.random() * colors.length)];
+    
+    document.body.appendChild(trail);
+    setTimeout(() => trail.remove(), 600);
 }
 
 function createClickEffect() {
@@ -147,12 +189,50 @@ function createClickEffect() {
     
     const beanButton = document.getElementById('beanButton');
     const beanRect = beanButton.getBoundingClientRect();
-    clickText.style.left = (beanRect.left + beanRect.width / 2) + 'px';
-    clickText.style.top = (beanRect.top + beanRect.height / 2) + 'px';
+    const centerX = beanRect.left + beanRect.width / 2;
+    const centerY = beanRect.top + beanRect.height / 2;
+    
+    clickText.style.left = centerX + 'px';
+    clickText.style.top = centerY + 'px';
     clickText.style.position = 'fixed';
     
     document.body.appendChild(clickText);
     setTimeout(() => clickText.remove(), 1000);
+    
+    // Add particle effect
+    createParticles(centerX, centerY);
+}
+
+// Create particle effects when clicking
+function createParticles(x, y) {
+    const particleCount = 6 + Math.floor(Math.random() * 4); // 6-9 particles
+    for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = x + 'px';
+        particle.style.top = y + 'px';
+        particle.style.position = 'fixed';
+        
+        const angle = (Math.PI * 2 * i) / particleCount + (Math.random() - 0.5) * 0.5;
+        const velocity = 40 + Math.random() * 60;
+        const tx = Math.cos(angle) * velocity;
+        const ty = Math.sin(angle) * velocity;
+        
+        particle.style.setProperty('--tx', tx + 'px');
+        particle.style.setProperty('--ty', ty + 'px');
+        
+        document.body.appendChild(particle);
+        
+        setTimeout(() => particle.remove(), 600);
+    }
+    
+    // Add ripple effect
+    const ripple = document.createElement('div');
+    ripple.className = 'ripple';
+    ripple.style.left = (x - 100) + 'px';
+    ripple.style.top = (y - 100) + 'px';
+    document.body.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 800);
 }
 
 function updateCombo() {
@@ -175,14 +255,91 @@ function updateCombo() {
 
 function updateComboDisplay() {
     const comboDisplay = document.getElementById('comboDisplay');
+    const beanButton = document.getElementById('beanButton');
+    
     if (comboDisplay) {
         if (gameState.comboMultiplier > 1) {
             comboDisplay.textContent = '🔥 ' + gameState.comboMultiplier.toFixed(1) + 'x COMBO!';
             comboDisplay.style.display = 'flex';
+            
+            // Enable cursor trail for high combos
+            trailEnabled = gameState.comboMultiplier >= 3;
+            
+            // Add rainbow glow to bean for very high combos
+            if (gameState.comboMultiplier >= 5 && beanButton) {
+                beanButton.classList.add('rainbow-glow');
+            } else if (beanButton) {
+                beanButton.classList.remove('rainbow-glow');
+            }
+            
+            // Add screen shake for high combos
+            if (gameState.comboMultiplier >= 5 && gameState.comboClicks % 5 === 0) {
+                triggerScreenShake();
+            }
+            
+            // Add confetti for milestone combos
+            if (gameState.comboMultiplier >= 10 && gameState.comboClicks % 10 === 0) {
+                createConfetti(50);
+            }
         } else {
             comboDisplay.style.display = 'none';
+            trailEnabled = false;
+            if (beanButton) {
+                beanButton.classList.remove('rainbow-glow');
+            }
         }
     }
+}
+
+// Screen shake effect
+function triggerScreenShake() {
+    const container = document.querySelector('.container');
+    if (container) {
+        container.classList.add('shake');
+        setTimeout(() => container.classList.remove('shake'), 500);
+    }
+}
+
+// Create confetti celebration
+function createConfetti(count) {
+    const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#ffa07a', '#98d8c8', '#f7dc6f', '#bb8fce'];
+    for (let i = 0; i < count; i++) {
+        setTimeout(() => {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.top = '-10px';
+            confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.animationDelay = Math.random() * 0.3 + 's';
+            confetti.style.animationDuration = (2 + Math.random() * 2) + 's';
+            document.body.appendChild(confetti);
+            setTimeout(() => confetti.remove(), 5000);
+        }, i * 30);
+    }
+}
+
+// Create floating coins
+function createFloatingCoins(x, y, count) {
+    for (let i = 0; i < count; i++) {
+        setTimeout(() => {
+            const coin = document.createElement('div');
+            coin.className = 'floating-coin';
+            coin.textContent = '🪙';
+            coin.style.left = (x + (Math.random() - 0.5) * 100) + 'px';
+            coin.style.top = y + 'px';
+            coin.style.animationDelay = (i * 0.1) + 's';
+            document.body.appendChild(coin);
+            setTimeout(() => coin.remove(), 2000);
+        }, i * 50);
+    }
+}
+
+// Screen flash effect
+function triggerScreenFlash() {
+    const flash = document.createElement('div');
+    flash.className = 'screen-flash';
+    document.body.appendChild(flash);
+    setTimeout(() => flash.remove(), 500);
 }
 
 function getActiveBoostMultipliers() {
@@ -209,6 +366,32 @@ function buyUpgrade(upgradeType) {
     if (gameState.beans >= cost) {
         gameState.beans -= cost;
         upgrade.count++;
+        
+        // Visual celebrations based on upgrade cost
+        const upgradeCard = document.querySelector(`[data-upgrade="${upgradeType}"]`)?.closest('.upgrade-card');
+        if (upgradeCard) {
+            upgradeCard.classList.add('upgrade-purchased');
+            setTimeout(() => upgradeCard.classList.remove('upgrade-purchased'), 600);
+            
+            const rect = upgradeCard.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            
+            // Small celebration for normal upgrades
+            createFloatingCoins(centerX, centerY, 3);
+            
+            // Big celebration for expensive upgrades
+            if (cost >= 1000000) {
+                triggerScreenFlash();
+                createConfetti(30);
+                triggerScreenShake();
+            } else if (cost >= 100000) {
+                createConfetti(15);
+            } else if (cost >= 10000) {
+                createFloatingCoins(centerX, centerY, 8);
+            }
+        }
+        
         updateAll();
         checkAchievements();
         saveGame();
@@ -218,9 +401,15 @@ function buyUpgrade(upgradeType) {
 }
 
 function updateDisplay() {
+    const prevBeans = parseFloat(document.getElementById('beanCount').textContent.replace(/[KMB]/g, '')) || 0;
+    const currentBeans = gameState.beans;
+    
     document.getElementById('beanCount').textContent = formatNumber(gameState.beans);
     document.getElementById('beansPerSecond').textContent = formatNumber(gameState.beansPerSecond);
     document.getElementById('beansPerClick').textContent = formatNumber(gameState.beansPerClick);
+    
+    // Check for milestone achievements
+    checkMilestones(currentBeans);
     
     for (let key in gameState.upgrades) {
         const upgrade = gameState.upgrades[key];
@@ -232,6 +421,32 @@ function updateDisplay() {
     }
 }
 
+// Check and celebrate milestones
+function checkMilestones(beans) {
+    const milestones = [100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000];
+    const lastMilestone = gameState.lastMilestone || 0;
+    
+    for (const milestone of milestones) {
+        if (beans >= milestone && lastMilestone < milestone) {
+            gameState.lastMilestone = milestone;
+            celebrateMilestone(milestone);
+            break;
+        }
+    }
+}
+
+function celebrateMilestone(milestone) {
+    const celebration = document.createElement('div');
+    celebration.className = 'milestone-celebration';
+    celebration.textContent = `🎉 ${formatNumber(milestone)} BEANS! 🎉`;
+    document.body.appendChild(celebration);
+    setTimeout(() => celebration.remove(), 2000);
+    
+    createConfetti(100);
+    triggerScreenFlash();
+    triggerScreenShake();
+}
+
 function updateUpgradeButtons() {
     const buyButtons = document.querySelectorAll('.buy-button');
     buyButtons.forEach(button => {
@@ -239,12 +454,38 @@ function updateUpgradeButtons() {
         const cost = getUpgradeCost(upgradeType);
         const card = button.closest('.upgrade-card');
         
+        // Update button state
         if (gameState.beans >= cost) {
             button.disabled = false;
-            if (card) card.classList.remove('disabled');
+            if (card) {
+                card.classList.remove('disabled');
+                card.classList.add('affordable');
+            }
         } else {
             button.disabled = true;
-            if (card) card.classList.add('disabled');
+            if (card) {
+                card.classList.add('disabled');
+                card.classList.remove('affordable');
+            }
+        }
+        
+        // Update progress bar
+        let progressBar = card?.querySelector('.upgrade-progress-bar');
+        if (!progressBar) {
+            const progressContainer = document.createElement('div');
+            progressContainer.className = 'upgrade-progress';
+            progressBar = document.createElement('div');
+            progressBar.className = 'upgrade-progress-bar';
+            progressContainer.appendChild(progressBar);
+            const upgradeInfo = card?.querySelector('.upgrade-info');
+            if (upgradeInfo) {
+                upgradeInfo.insertBefore(progressContainer, upgradeInfo.firstChild);
+            }
+        }
+        
+        if (progressBar) {
+            const progress = Math.min((gameState.beans / cost) * 100, 100);
+            progressBar.style.width = progress + '%';
         }
     });
 }
@@ -361,7 +602,7 @@ function showAchievementNotification(achievement) {
 }
 
 function updateAchievementDisplay() {
-    const achievementContainer = document.getElementById('achievementList');
+    const achievementContainer = document.getElementById('achievementsList');
     if (!achievementContainer) return;
     
     achievementContainer.innerHTML = '';
@@ -561,6 +802,11 @@ function spawnGoldenBean() {
         document.body.appendChild(floater);
         setTimeout(() => floater.remove(), 1000);
         
+        // Golden bean celebration!
+        createConfetti(20);
+        createFloatingCoins(x + 50, y + 50, 10);
+        triggerScreenFlash();
+        
         goldenBean.remove();
         checkAchievements();
         updateAll();
@@ -591,8 +837,12 @@ function init() {
         button.addEventListener('click', () => {
             const upgradeType = button.getAttribute('data-upgrade');
             if (buyUpgrade(upgradeType)) {
-                button.textContent = 'Bought!';
-                setTimeout(() => { button.textContent = 'Buy'; }, 300);
+                button.classList.add('bought');
+                button.textContent = '✓ Bought!';
+                setTimeout(() => { 
+                    button.classList.remove('bought');
+                    button.textContent = 'Buy'; 
+                }, 600);
             }
         });
     });
@@ -608,6 +858,21 @@ function init() {
     document.getElementById('settingsModal').addEventListener('click', (e) => {
         if (e.target.id === 'settingsModal') {
             document.getElementById('settingsModal').classList.remove('active');
+        }
+    });
+
+    // Achievements Modal
+    document.getElementById('achievementsButton').addEventListener('click', () => {
+        document.getElementById('achievementsModal').classList.add('active');
+    });
+    
+    document.getElementById('closeAchievements').addEventListener('click', () => {
+        document.getElementById('achievementsModal').classList.remove('active');
+    });
+    
+    document.getElementById('achievementsModal').addEventListener('click', (e) => {
+        if (e.target.id === 'achievementsModal') {
+            document.getElementById('achievementsModal').classList.remove('active');
         }
     });
     
@@ -683,6 +948,83 @@ function init() {
     }, 1000);
     
     setInterval(saveGame, 30000);
+    
+    // Add tooltip functionality
+    setupTooltips();
 }
 
+// Tooltip system
+function setupTooltips() {
+    const tooltip = document.createElement('div');
+    tooltip.className = 'tooltip';
+    document.body.appendChild(tooltip);
+    
+    document.querySelectorAll('.upgrade-card').forEach(card => {
+        card.addEventListener('mouseenter', (e) => {
+            const upgradeType = card.querySelector('.buy-button')?.getAttribute('data-upgrade');
+            if (!upgradeType) return;
+            
+            const upgrade = gameState.upgrades[upgradeType];
+            const cost = getUpgradeCost(upgradeType);
+            const owned = upgrade.count;
+            
+            let tooltipHTML = `<div class="tooltip-title">${card.querySelector('h3')?.textContent || ''}</div>`;
+            
+            if (upgrade.clickBonus) {
+                const totalBonus = upgrade.clickBonus * (owned + 1);
+                tooltipHTML += `<div class="tooltip-detail">Click Bonus: +${formatNumber(upgrade.clickBonus)}</div>`;
+                tooltipHTML += `<div class="tooltip-detail">Next Total: ${formatNumber(gameState.beansPerClick + upgrade.clickBonus)}/click</div>`;
+            }
+            
+            if (upgrade.production) {
+                const totalProduction = upgrade.production * (owned + 1);
+                tooltipHTML += `<div class="tooltip-detail">Production: +${formatNumber(upgrade.production)}/sec</div>`;
+                tooltipHTML += `<div class="tooltip-detail">Next Total: ${formatNumber(gameState.beansPerSecond + upgrade.production)}/sec</div>`;
+            }
+            
+            tooltipHTML += `<div class="tooltip-detail">Owned: ${owned}</div>`;
+            tooltipHTML += `<div class="tooltip-detail">Cost: ${formatNumber(cost)} beans</div>`;
+            
+            tooltip.innerHTML = tooltipHTML;
+            tooltip.classList.add('visible');
+        });
+        
+        card.addEventListener('mousemove', (e) => {
+            tooltip.style.left = (e.clientX + 15) + 'px';
+            tooltip.style.top = (e.clientY + 15) + 'px';
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            tooltip.classList.remove('visible');
+        });
+    });
+}
+
+// ===== SPARKLE EFFECTS =====
+function createRandomSparkle() {
+    const sparkle = document.createElement('div');
+    sparkle.className = 'random-sparkle';
+    sparkle.textContent = ['✨', '⭐', '💫', '🌟'][Math.floor(Math.random() * 4)];
+    sparkle.style.left = Math.random() * 100 + '%';
+    sparkle.style.top = Math.random() * 100 + '%';
+    sparkle.style.fontSize = (Math.random() * 1.5 + 0.5) + 'rem';
+    document.body.appendChild(sparkle);
+    
+    setTimeout(() => sparkle.remove(), 3000);
+}
+
+// Create sparkles periodically
+setInterval(createRandomSparkle, 2000);
+
+// Add floating coins animation periodically
+setInterval(() => {
+    if (gameState.beansPerSecond > 0) {
+        const coinCount = Math.min(3, Math.floor(gameState.beansPerSecond / 1000) + 1);
+        for (let i = 0; i < coinCount; i++) {
+            setTimeout(() => createFloatingCoins(1), i * 200);
+        }
+    }
+}, 5000);
+
 window.addEventListener('load', init);
+
