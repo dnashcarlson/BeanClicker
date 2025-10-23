@@ -44,26 +44,28 @@
         <main>
             <div class="game-container">
                 <div class="left-panel">
-                    <div class="stats-panel">
-                        <div class="stat">
-                            <span class="stat-label">Total Beans:</span>
-                            <span class="stat-value" id="beanCount">0</span>
+                    <div class="top-section">
+                        <div class="stats-panel">
+                            <div class="stat">
+                                <span class="stat-label">Total Beans:</span>
+                                <span class="stat-value" id="beanCount">0</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Beans per Second:</span>
+                                <span class="stat-value" id="beansPerSecond">0</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Beans per Click:</span>
+                                <span class="stat-value" id="beansPerClick">1</span>
+                            </div>
                         </div>
-                        <div class="stat">
-                            <span class="stat-label">Beans per Second:</span>
-                            <span class="stat-value" id="beansPerSecond">0</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-label">Beans per Click:</span>
-                            <span class="stat-value" id="beansPerClick">1</span>
-                        </div>
-                    </div>
 
-                    <div class="click-area">
-                        <button id="beanButton" class="bean-button">
-                            🫘
-                        </button>
-                        <div id="clickEffect"></div>
+                        <div class="click-area">
+                            <button id="beanButton" class="bean-button">
+                                🫘
+                            </button>
+                            <div id="clickEffect"></div>
+                        </div>
                     </div>
                     
                     <!-- Active Boosts -->
@@ -78,7 +80,7 @@
                             <div class="tabs">
                                 <button class="tab-button active" data-tab="clicking">👆 Clicking</button>
                                 <button class="tab-button" data-tab="production">🏭 Production</button>
-                                <button class="tab-button" data-tab="advanced">⚡ Advanced</button>
+                                <button class="tab-button" data-tab="chili">🌶️ Chili Soup</button>
                             </div>
 
                 <!-- Clicking Tab -->
@@ -88,8 +90,8 @@
                             <div class="upgrade-icon">☝️</div>
                             <div class="upgrade-info">
                                 <h3>Cursor</h3>
-                                <p class="upgrade-description">+0.2 beans per click</p>
-                                <p class="upgrade-cost">Cost: <span id="cost-cursor">10</span> beans</p>
+                                <p class="upgrade-description">+0.1 beans per click</p>
+                                <p class="upgrade-cost">Cost: <span id="cost-cursor">15</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-cursor">0</span></p>
                             </div>
                             <button class="buy-button" data-upgrade="cursor">Buy</button>
@@ -99,8 +101,8 @@
                             <div class="upgrade-icon">👆</div>
                             <div class="upgrade-info">
                                 <h3>Better Cursor</h3>
-                                <p class="upgrade-description">+0.5 beans per click</p>
-                                <p class="upgrade-cost">Cost: <span id="cost-cursor2">30</span> beans</p>
+                                <p class="upgrade-description">+0.2 beans per click</p>
+                                <p class="upgrade-cost">Cost: <span id="cost-cursor2">100</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-cursor2">0</span></p>
                             </div>
                             <button class="buy-button" data-upgrade="cursor2">Buy</button>
@@ -110,8 +112,8 @@
                             <div class="upgrade-icon">💪</div>
                             <div class="upgrade-info">
                                 <h3>Reinforced Finger</h3>
-                                <p class="upgrade-description">+1 bean per click</p>
-                                <p class="upgrade-cost">Cost: <span id="cost-reinforcedFinger">100</span> beans</p>
+                                <p class="upgrade-description">+0.5 beans per click</p>
+                                <p class="upgrade-cost">Cost: <span id="cost-reinforcedFinger">500</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-reinforcedFinger">0</span></p>
                             </div>
                             <button class="buy-button" data-upgrade="reinforcedFinger">Buy</button>
@@ -121,8 +123,8 @@
                             <div class="upgrade-icon">✊</div>
                             <div class="upgrade-info">
                                 <h3>Iron Fist</h3>
-                                <p class="upgrade-description">+2 beans per click</p>
-                                <p class="upgrade-cost">Cost: <span id="cost-ironFist">250</span> beans</p>
+                                <p class="upgrade-description">+1 bean per click</p>
+                                <p class="upgrade-cost">Cost: <span id="cost-ironFist">2000</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-ironFist">0</span></p>
                             </div>
                             <button class="buy-button" data-upgrade="ironFist">Buy</button>
@@ -132,8 +134,8 @@
                             <div class="upgrade-icon">✨</div>
                             <div class="upgrade-info">
                                 <h3>Golden Touch</h3>
-                                <p class="upgrade-description">+4 beans per click</p>
-                                <p class="upgrade-cost">Cost: <span id="cost-goldenTouch">800</span> beans</p>
+                                <p class="upgrade-description">+2 beans per click</p>
+                                <p class="upgrade-cost">Cost: <span id="cost-goldenTouch">8000</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-goldenTouch">0</span></p>
                             </div>
                             <button class="buy-button" data-upgrade="goldenTouch">Buy</button>
@@ -143,8 +145,8 @@
                             <div class="upgrade-icon">💎</div>
                             <div class="upgrade-info">
                                 <h3>Diamond Hand</h3>
-                                <p class="upgrade-description">+8 beans per click</p>
-                                <p class="upgrade-cost">Cost: <span id="cost-diamondHand">2500</span> beans</p>
+                                <p class="upgrade-description">+4 beans per click</p>
+                                <p class="upgrade-cost">Cost: <span id="cost-diamondHand">35000</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-diamondHand">0</span></p>
                             </div>
                             <button class="buy-button" data-upgrade="diamondHand">Buy</button>
@@ -154,8 +156,8 @@
                             <div class="upgrade-icon">🦾</div>
                             <div class="upgrade-info">
                                 <h3>Titanic Grip</h3>
-                                <p class="upgrade-description">+16 beans per click</p>
-                                <p class="upgrade-cost">Cost: <span id="cost-titanicGrip">8000</span> beans</p>
+                                <p class="upgrade-description">+8 beans per click</p>
+                                <p class="upgrade-cost">Cost: <span id="cost-titanicGrip">150000</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-titanicGrip">0</span></p>
                             </div>
                             <button class="buy-button" data-upgrade="titanicGrip">Buy</button>
@@ -165,8 +167,8 @@
                             <div class="upgrade-icon">🌟</div>
                             <div class="upgrade-info">
                                 <h3>Cosmic Pointer</h3>
-                                <p class="upgrade-description">+32 beans per click</p>
-                                <p class="upgrade-cost">Cost: <span id="cost-cosmicPointer">25000</span> beans</p>
+                                <p class="upgrade-description">+15 beans per click</p>
+                                <p class="upgrade-cost">Cost: <span id="cost-cosmicPointer">650000</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-cosmicPointer">0</span></p>
                             </div>
                             <button class="buy-button" data-upgrade="cosmicPointer">Buy</button>
@@ -176,8 +178,8 @@
                             <div class="upgrade-icon">⚡</div>
                             <div class="upgrade-info">
                                 <h3>Divine Click</h3>
-                                <p class="upgrade-description">+64 beans per click</p>
-                                <p class="upgrade-cost">Cost: <span id="cost-divineClick">80000</span> beans</p>
+                                <p class="upgrade-description">+30 beans per click</p>
+                                <p class="upgrade-cost">Cost: <span id="cost-divineClick">2800000</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-divineClick">0</span></p>
                             </div>
                             <button class="buy-button" data-upgrade="divineClick">Buy</button>
@@ -187,8 +189,8 @@
                             <div class="upgrade-icon">🔥</div>
                             <div class="upgrade-info">
                                 <h3>Omnipotent Touch</h3>
-                                <p class="upgrade-description">+128 beans per click</p>
-                                <p class="upgrade-cost">Cost: <span id="cost-omnipotentTouch">250000</span> beans</p>
+                                <p class="upgrade-description">+60 beans per click</p>
+                                <p class="upgrade-cost">Cost: <span id="cost-omnipotentTouch">12000000</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-omnipotentTouch">0</span></p>
                             </div>
                             <button class="buy-button" data-upgrade="omnipotentTouch">Buy</button>
@@ -198,8 +200,8 @@
                             <div class="upgrade-icon">♾️</div>
                             <div class="upgrade-info">
                                 <h3>Infinite Finger</h3>
-                                <p class="upgrade-description">+256 beans per click</p>
-                                <p class="upgrade-cost">Cost: <span id="cost-infiniteFinger">800000</span> beans</p>
+                                <p class="upgrade-description">+120 beans per click</p>
+                                <p class="upgrade-cost">Cost: <span id="cost-infiniteFinger">50000000</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-infiniteFinger">0</span></p>
                             </div>
                             <button class="buy-button" data-upgrade="infiniteFinger">Buy</button>
@@ -209,8 +211,8 @@
                             <div class="upgrade-icon">🌌</div>
                             <div class="upgrade-info">
                                 <h3>Universal Clicker</h3>
-                                <p class="upgrade-description">+512 beans per click</p>
-                                <p class="upgrade-cost">Cost: <span id="cost-universalClicker">2500000</span> beans</p>
+                                <p class="upgrade-description">+250 beans per click</p>
+                                <p class="upgrade-cost">Cost: <span id="cost-universalClicker">220000000</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-universalClicker">0</span></p>
                             </div>
                             <button class="buy-button" data-upgrade="universalClicker">Buy</button>
@@ -220,8 +222,8 @@
                             <div class="upgrade-icon">⚛️</div>
                             <div class="upgrade-info">
                                 <h3>Quantum Hand</h3>
-                                <p class="upgrade-description">+1024 beans per click</p>
-                                <p class="upgrade-cost">Cost: <span id="cost-quantumHand">8000000</span> beans</p>
+                                <p class="upgrade-description">+500 beans per click</p>
+                                <p class="upgrade-cost">Cost: <span id="cost-quantumHand">1000000000</span> beans</p>
                                 <p class="upgrade-owned">Owned: <span id="owned-quantumHand">0</span></p>
                             </div>
                             <button class="buy-button" data-upgrade="quantumHand">Buy</button>
@@ -377,152 +379,42 @@
                     </div>
                 </div>
 
-                <!-- Advanced Tab -->
-                <div class="tab-content" id="tab-advanced">
-                    <div class="upgrades-grid">
-                        <div class="upgrade-card" id="upgrade-alchemist">
-                            <div class="upgrade-icon">⚗️</div>
-                            <div class="upgrade-info">
-                                <h3>Alchemist</h3>
-                                <p class="upgrade-description">+90 beans/sec</p>
-                                <p class="upgrade-cost">Cost: <span id="cost-alchemist">50000</span> beans</p>
-                                <p class="upgrade-owned">Owned: <span id="owned-alchemist">0</span></p>
+                <!-- Chili Soup Tab -->
+                <div class="tab-content" id="tab-chili">
+                    <div class="chili-soup-container">
+                        <div class="chili-header-section">
+                            <div class="chili-points-display">
+                                <span class="chili-label">🌶️ Chili Points</span>
+                                <span class="chili-value" id="chiliPoints">0</span>
                             </div>
-                            <button class="buy-button" data-upgrade="alchemist">Buy</button>
+                            <p class="chili-description">Convert your beans into spicy chili points to unlock special bonuses!</p>
                         </div>
-
-                        <div class="upgrade-card" id="upgrade-wizard">
-                            <div class="upgrade-icon">🧙</div>
-                            <div class="upgrade-info">
-                                <h3>Bean Wizard</h3>
-                                <p class="upgrade-description">+220 beans/sec</p>
-                                <p class="upgrade-cost">Cost: <span id="cost-wizard">150000</span> beans</p>
-                                <p class="upgrade-owned">Owned: <span id="owned-wizard">0</span></p>
-                            </div>
-                            <button class="buy-button" data-upgrade="wizard">Buy</button>
+                        
+                        <div class="chili-action-section">
+                            <button id="makeSoupButton" class="make-soup-button">
+                                <span class="soup-icon">🍲</span>
+                                <span class="soup-text">Make Chili Soup</span>
+                                <span class="soup-cost">Cost: 1000 beans</span>
+                            </button>
                         </div>
-
-                        <div class="upgrade-card" id="upgrade-sorcerer">
-                            <div class="upgrade-icon">🔮</div>
-                            <div class="upgrade-info">
-                                <h3>Sorcerer</h3>
-                                <p class="upgrade-description">+550 beans/sec</p>
-                                <p class="upgrade-cost">Cost: <span id="cost-sorcerer">450000</span> beans</p>
-                                <p class="upgrade-owned">Owned: <span id="owned-sorcerer">0</span></p>
+                        
+                        <div class="chili-info-section">
+                            <div class="chili-stat-card">
+                                <div class="stat-icon">�</div>
+                                <div class="stat-info">
+                                    <span class="stat-number" id="totalSoups">0</span>
+                                    <span class="stat-label">Soups Made</span>
+                                </div>
                             </div>
-                            <button class="buy-button" data-upgrade="sorcerer">Buy</button>
+                            <div class="chili-stat-card">
+                                <div class="stat-icon">🌶️</div>
+                                <div class="stat-info">
+                                    <span class="stat-number" id="chiliRate">0</span>
+                                    <span class="stat-label">Chili Rate</span>
+                                </div>
+                            </div>
                         </div>
-
-                        <div class="upgrade-card" id="upgrade-portal">
-                            <div class="upgrade-icon">🌀</div>
-                            <div class="upgrade-info">
-                                <h3>Bean Portal</h3>
-                                <p class="upgrade-description">+1300 beans/sec</p>
-                                <p class="upgrade-cost">Cost: <span id="cost-portal">1300000</span> beans</p>
-                                <p class="upgrade-owned">Owned: <span id="owned-portal">0</span></p>
-                            </div>
-                            <button class="buy-button" data-upgrade="portal">Buy</button>
-                        </div>
-
-                        <div class="upgrade-card" id="upgrade-dimensionalRift">
-                            <div class="upgrade-icon">🕳️</div>
-                            <div class="upgrade-info">
-                                <h3>Dimensional Rift</h3>
-                                <p class="upgrade-description">+3200 beans/sec</p>
-                                <p class="upgrade-cost">Cost: <span id="cost-dimensionalRift">4000000</span> beans</p>
-                                <p class="upgrade-owned">Owned: <span id="owned-dimensionalRift">0</span></p>
-                            </div>
-                            <button class="buy-button" data-upgrade="dimensionalRift">Buy</button>
-                        </div>
-
-                        <div class="upgrade-card" id="upgrade-timeMachine">
-                            <div class="upgrade-icon">⏰</div>
-                            <div class="upgrade-info">
-                                <h3>Time Machine</h3>
-                                <p class="upgrade-description">+8000 beans/sec</p>
-                                <p class="upgrade-cost">Cost: <span id="cost-timeMachine">12000000</span> beans</p>
-                                <p class="upgrade-owned">Owned: <span id="owned-timeMachine">0</span></p>
-                            </div>
-                            <button class="buy-button" data-upgrade="timeMachine">Buy</button>
-                        </div>
-
-                        <div class="upgrade-card" id="upgrade-quantumComputer">
-                            <div class="upgrade-icon">💻</div>
-                            <div class="upgrade-info">
-                                <h3>Quantum Computer</h3>
-                                <p class="upgrade-description">+20000 beans/sec</p>
-                                <p class="upgrade-cost">Cost: <span id="cost-quantumComputer">36000000</span> beans</p>
-                                <p class="upgrade-owned">Owned: <span id="owned-quantumComputer">0</span></p>
-                            </div>
-                            <button class="buy-button" data-upgrade="quantumComputer">Buy</button>
-                        </div>
-
-                        <div class="upgrade-card" id="upgrade-blackHole">
-                            <div class="upgrade-icon">⚫</div>
-                            <div class="upgrade-info">
-                                <h3>Black Hole</h3>
-                                <p class="upgrade-description">+50000 beans/sec</p>
-                                <p class="upgrade-cost">Cost: <span id="cost-blackHole">110000000</span> beans</p>
-                                <p class="upgrade-owned">Owned: <span id="owned-blackHole">0</span></p>
-                            </div>
-                            <button class="buy-button" data-upgrade="blackHole">Buy</button>
-                        </div>
-
-                        <div class="upgrade-card" id="upgrade-multiverse">
-                            <div class="upgrade-icon">🎆</div>
-                            <div class="upgrade-info">
-                                <h3>Multiverse</h3>
-                                <p class="upgrade-description">+120000 beans/sec</p>
-                                <p class="upgrade-cost">Cost: <span id="cost-multiverse">330000000</span> beans</p>
-                                <p class="upgrade-owned">Owned: <span id="owned-multiverse">0</span></p>
-                            </div>
-                            <button class="buy-button" data-upgrade="multiverse">Buy</button>
-                        </div>
-
-                        <div class="upgrade-card" id="upgrade-realityBender">
-                            <div class="upgrade-icon">🌠</div>
-                            <div class="upgrade-info">
-                                <h3>Reality Bender</h3>
-                                <p class="upgrade-description">+300000 beans/sec</p>
-                                <p class="upgrade-cost">Cost: <span id="cost-realityBender">1000000000</span> beans</p>
-                                <p class="upgrade-owned">Owned: <span id="owned-realityBender">0</span></p>
-                            </div>
-                            <button class="buy-button" data-upgrade="realityBender">Buy</button>
-                        </div>
-
-                        <div class="upgrade-card" id="upgrade-godMode">
-                            <div class="upgrade-icon">👁️</div>
-                            <div class="upgrade-info">
-                                <h3>God Mode</h3>
-                                <p class="upgrade-description">+750000 beans/sec</p>
-                                <p class="upgrade-cost">Cost: <span id="cost-godMode">3000000000</span> beans</p>
-                                <p class="upgrade-owned">Owned: <span id="owned-godMode">0</span></p>
-                            </div>
-                            <button class="buy-button" data-upgrade="godMode">Buy</button>
-                        </div>
-
-                        <div class="upgrade-card" id="upgrade-transcendence">
-                            <div class="upgrade-icon">✝️</div>
-                            <div class="upgrade-info">
-                                <h3>Transcendence</h3>
-                                <p class="upgrade-description">+1800000 beans/sec</p>
-                                <p class="upgrade-cost">Cost: <span id="cost-transcendence">9000000000</span> beans</p>
-                                <p class="upgrade-owned">Owned: <span id="owned-transcendence">0</span></p>
-                            </div>
-                            <button class="buy-button" data-upgrade="transcendence">Buy</button>
-                        </div>
-
-                        <div class="upgrade-card" id="upgrade-infinity">
-                            <div class="upgrade-icon">♾️</div>
-                            <div class="upgrade-info">
-                                <h3>Infinity</h3>
-                                <p class="upgrade-description">+4500000 beans/sec</p>
-                                <p class="upgrade-cost">Cost: <span id="cost-infinity">27000000000</span> beans</p>
-                                <p class="upgrade-owned">Owned: <span id="owned-infinity">0</span></p>
-                            </div>
-                            <button class="buy-button" data-upgrade="infinity">Buy</button>
-                        </div>
-                            </div>
+                    </div>
                         </div>
                     </div>
                 </div>

@@ -4,6 +4,7 @@ let gameState = {
     beansPerClick: 1,
     beansPerSecond: 0,
     totalBeansAllTime: 0,
+    chiliPoints: 0,
     achievements: [],
     activeBoosts: [],
     autoClickerEnabled: false,
@@ -12,22 +13,23 @@ let gameState = {
     stats: {
         totalClicks: 0,
         goldenBeansClicked: 0,
-        gardenHarvests: 0
+        gardenHarvests: 0,
+        soupsMade: 0
     },
     upgrades: {
-        cursor: { count: 0, baseCost: 10, multiplier: 1.2, clickBonus: 0.2 },
-        cursor2: { count: 0, baseCost: 30, multiplier: 1.25, clickBonus: 0.5 },
-        reinforcedFinger: { count: 0, baseCost: 100, multiplier: 1.25, clickBonus: 1 },
-        ironFist: { count: 0, baseCost: 250, multiplier: 1.3, clickBonus: 2 },
-        goldenTouch: { count: 0, baseCost: 800, multiplier: 1.3, clickBonus: 4 },
-        diamondHand: { count: 0, baseCost: 2500, multiplier: 1.35, clickBonus: 8 },
-        titanicGrip: { count: 0, baseCost: 8000, multiplier: 1.35, clickBonus: 16 },
-        cosmicPointer: { count: 0, baseCost: 25000, multiplier: 1.35, clickBonus: 32 },
-        divineClick: { count: 0, baseCost: 80000, multiplier: 1.4, clickBonus: 64 },
-        omnipotentTouch: { count: 0, baseCost: 250000, multiplier: 1.4, clickBonus: 128 },
-        infiniteFinger: { count: 0, baseCost: 800000, multiplier: 1.4, clickBonus: 256 },
-        universalClicker: { count: 0, baseCost: 2500000, multiplier: 1.4, clickBonus: 512 },
-        quantumHand: { count: 0, baseCost: 8000000, multiplier: 1.45, clickBonus: 1024 },
+        cursor: { count: 0, baseCost: 15, multiplier: 1.3, clickBonus: 0.1 },
+        cursor2: { count: 0, baseCost: 100, multiplier: 1.35, clickBonus: 0.2 },
+        reinforcedFinger: { count: 0, baseCost: 500, multiplier: 1.35, clickBonus: 0.5 },
+        ironFist: { count: 0, baseCost: 2000, multiplier: 1.4, clickBonus: 1 },
+        goldenTouch: { count: 0, baseCost: 8000, multiplier: 1.4, clickBonus: 2 },
+        diamondHand: { count: 0, baseCost: 35000, multiplier: 1.45, clickBonus: 4 },
+        titanicGrip: { count: 0, baseCost: 150000, multiplier: 1.45, clickBonus: 8 },
+        cosmicPointer: { count: 0, baseCost: 650000, multiplier: 1.45, clickBonus: 15 },
+        divineClick: { count: 0, baseCost: 2800000, multiplier: 1.5, clickBonus: 30 },
+        omnipotentTouch: { count: 0, baseCost: 12000000, multiplier: 1.5, clickBonus: 60 },
+        infiniteFinger: { count: 0, baseCost: 50000000, multiplier: 1.5, clickBonus: 120 },
+        universalClicker: { count: 0, baseCost: 220000000, multiplier: 1.5, clickBonus: 250 },
+        quantumHand: { count: 0, baseCost: 1000000000, multiplier: 1.55, clickBonus: 500 },
         seedling: { count: 0, baseCost: 25, multiplier: 1.2, production: 0.2 },
         grandma: { count: 0, baseCost: 80, multiplier: 1.25, production: 0.5 },
         gardener: { count: 0, baseCost: 200, multiplier: 1.25, production: 1.2 },
@@ -516,7 +518,102 @@ function updateAll() {
     gameState.beansPerClick = calculateBeansPerClick();
     updateDisplay();
     updateUpgradeButtons();
+    updateChiliDisplay();
     updateAutoClickerDisplay();
+}
+
+// ===== CHILI SOUP SYSTEM =====
+function makeChiliSoup() {
+    const beanCost = 1000;
+    const chiliPointsPerSoup = 1;
+    
+    if (gameState.beans >= beanCost) {
+        gameState.beans -= beanCost;
+        gameState.chiliPoints += chiliPointsPerSoup;
+        gameState.stats.soupsMade++;
+        
+        // Visual feedback
+        const button = document.getElementById('makeSoupButton');
+        if (button) {
+            const originalHTML = button.innerHTML;
+            button.innerHTML = '<span class="soup-icon">🔥</span><span class="soup-text">Soup Made!</span>';
+            button.style.transform = 'scale(1.1)';
+            setTimeout(() => {
+                button.innerHTML = originalHTML;
+                button.style.transform = 'scale(1)';
+            }, 500);
+        }
+        
+        // Create spicy particle effects
+        createChiliParticles();
+        
+        updateAll();
+        checkAchievements();
+    }
+}
+
+function createChiliParticles() {
+    const button = document.getElementById('makeSoupButton');
+    if (!button) return;
+    
+    const rect = button.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    
+    for (let i = 0; i < 8; i++) {
+        const particle = document.createElement('div');
+        particle.textContent = '🌶️';
+        particle.style.position = 'fixed';
+        particle.style.left = centerX + 'px';
+        particle.style.top = centerY + 'px';
+        particle.style.fontSize = '1.5rem';
+        particle.style.pointerEvents = 'none';
+        particle.style.zIndex = '10000';
+        
+        const angle = (Math.PI * 2 * i) / 8;
+        const distance = 100;
+        const endX = centerX + Math.cos(angle) * distance;
+        const endY = centerY + Math.sin(angle) * distance;
+        
+        particle.animate([
+            { transform: 'translate(-50%, -50%) scale(1)', opacity: 1 },
+            { transform: `translate(${endX - centerX}px, ${endY - centerY}px) scale(0.5)`, opacity: 0 }
+        ], {
+            duration: 800,
+            easing: 'ease-out'
+        });
+        
+        document.body.appendChild(particle);
+        setTimeout(() => particle.remove(), 800);
+    }
+}
+
+function updateChiliDisplay() {
+    const chiliPointsEl = document.getElementById('chiliPoints');
+    const totalSoupsEl = document.getElementById('totalSoups');
+    const chiliRateEl = document.getElementById('chiliRate');
+    
+    if (chiliPointsEl) {
+        chiliPointsEl.textContent = formatNumber(gameState.chiliPoints);
+    }
+    if (totalSoupsEl) {
+        totalSoupsEl.textContent = formatNumber(gameState.stats.soupsMade);
+    }
+    if (chiliRateEl) {
+        chiliRateEl.textContent = '0/sec'; // For future upgrades
+    }
+    
+    // Update button state
+    const button = document.getElementById('makeSoupButton');
+    if (button) {
+        if (gameState.beans >= 1000) {
+            button.disabled = false;
+            button.style.opacity = '1';
+        } else {
+            button.disabled = true;
+            button.style.opacity = '0.6';
+        }
+    }
 }
 
 function saveGame() {
@@ -555,30 +652,71 @@ function checkAchievements() {
 }
 
 function showAchievementNotification(achievement) {
+    // Create main notification panel
     const notification = document.createElement('div');
     notification.className = 'achievement-notification';
-    notification.innerHTML = '<div class="achievement-title">🏆 Achievement Unlocked! 🏆</div><div class="achievement-name">' + achievement.name + '</div><div class="achievement-desc">' + achievement.description + '</div><div class="achievement-reward">💰 +' + formatNumber(achievement.reward) + ' beans 💰</div>';
+    notification.innerHTML = `
+        <div class="achievement-notification-inner">
+            <div class="achievement-shine"></div>
+            <div class="achievement-icon-large">🏆</div>
+            <div class="achievement-title">Achievement Unlocked!</div>
+            <div class="achievement-name">${achievement.name}</div>
+            <div class="achievement-desc">${achievement.description}</div>
+            <div class="achievement-reward">
+                <span class="reward-icon">💰</span>
+                <span class="reward-text">+${formatNumber(achievement.reward)} beans</span>
+            </div>
+        </div>
+    `;
     document.body.appendChild(notification);
     
-    // Add confetti celebration for achievement
+    // Create side panel that stays visible
+    const sidePanel = document.createElement('div');
+    sidePanel.className = 'achievement-side-panel';
+    sidePanel.innerHTML = `
+        <div class="side-panel-content">
+            <div class="side-panel-icon">🏆</div>
+            <div class="side-panel-info">
+                <div class="side-panel-title">Achievement!</div>
+                <div class="side-panel-name">${achievement.name}</div>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(sidePanel);
+    
+    // Trigger screen shake
+    triggerScreenShake();
+    
+    // Add confetti celebration
     setTimeout(() => {
-        createConfetti(20);
+        createConfetti(30);
+        
         // Create sparkles around the notification
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < 15; i++) {
             setTimeout(() => {
                 const notifRect = notification.getBoundingClientRect();
-                const sparkleX = notifRect.left + notifRect.width / 2 + (Math.random() - 0.5) * 200;
-                const sparkleY = notifRect.top + notifRect.height / 2 + (Math.random() - 0.5) * 100;
+                const sparkleX = notifRect.left + notifRect.width / 2 + (Math.random() - 0.5) * 300;
+                const sparkleY = notifRect.top + notifRect.height / 2 + (Math.random() - 0.5) * 200;
                 createSparkleAt(sparkleX, sparkleY);
-            }, i * 100);
+            }, i * 80);
         }
     }, 200);
     
+    // Animate notification in
     setTimeout(() => notification.classList.add('show'), 100);
+    setTimeout(() => sidePanel.classList.add('show'), 100);
+    
+    // Remove main notification after delay
     setTimeout(() => {
         notification.classList.remove('show');
         setTimeout(() => notification.remove(), 600);
-    }, 4500);
+    }, 5000);
+    
+    // Remove side panel after longer delay
+    setTimeout(() => {
+        sidePanel.classList.remove('show');
+        setTimeout(() => sidePanel.remove(), 500);
+    }, 8000);
 }
 
 function updateAchievementDisplay() {
@@ -857,6 +995,12 @@ function init() {
     
     document.getElementById('saveButton').addEventListener('click', saveGame);
     document.getElementById('resetButton').addEventListener('click', resetGame);
+    
+    // Chili Soup Button
+    const makeSoupButton = document.getElementById('makeSoupButton');
+    if (makeSoupButton) {
+        makeSoupButton.addEventListener('click', makeChiliSoup);
+    }
     
     document.querySelectorAll('.tab-button').forEach(button => {
         button.addEventListener('click', () => {
